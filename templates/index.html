@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>YouTube Heatmap Clipper</title>
     <link rel="stylesheet" href="/static/style.css" />
   </head>
@@ -40,11 +41,11 @@
               <span>EN</span>
             </button>
           </div>
-          <a class="ghLink" href="https://github.com/naufaljct48" target="_blank" rel="noreferrer">
+          <a class="ghLink" href="https://github.com/febriezm" target="_blank" rel="noreferrer">
             <svg class="ghIcon" viewBox="0 0 16 16" aria-hidden="true">
               <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"></path>
             </svg>
-            <span>NaufalJCT48</span>
+            <span>febriezm</span>
           </a>
         </div>
       </header>
@@ -66,7 +67,7 @@
           <div class="help" data-i18n="help.url">Tempel link video/shorts. Nanti keluar preview.</div>
         </div>
 
-        <div class="grid2">
+        <div class="grid3">
           <div class="row">
             <label class="label" data-i18n="label.mode">Mode</label>
             <select id="mode" class="input">
@@ -84,6 +85,15 @@
               <option value="original" data-i18n="opt.ratio.original">Original</option>
             </select>
             <div class="help" data-i18n="help.ratio">Pilih bentuk output video. 9:16 buat Shorts/Reels/TikTok.</div>
+          </div>
+          <div class="row">
+            <label class="label" data-i18n="label.resolution">Resolusi</label>
+            <select id="resolution" class="input">
+              <option value="720p">720p (HD)</option>
+              <option value="1080p">1080p (Full HD)</option>
+              <option value="4k" selected>4K (2160p Ultra HD)</option>
+            </select>
+            <div class="help" data-i18n="help.resolution">Kualitas output video (720p, 1080p, atau 4K).</div>
           </div>
         </div>
 
@@ -132,7 +142,8 @@
           <div class="row">
             <label class="label" data-i18n="label.subtitle_font">Font Subtitle</label>
             <select id="subtitle_font_select" class="input">
-              <option value="Plus Jakarta Sans" selected>Plus Jakarta Sans</option>
+              <option value="Poppins" selected>Poppins</option>
+              <option value="Plus Jakarta Sans">Plus Jakarta Sans</option>
               <option value="Montserrat">Montserrat</option>
               <option value="Roboto">Roboto</option>
               <option value="Arial">Arial</option>
@@ -173,6 +184,13 @@
           <button id="scanBtn" class="btn ghost" data-i18n="btn.scan">Scan Heatmap</button>
           <button id="clipBtn" class="btn" data-i18n="btn.clip">Buat Clip</button>
         </div>
+        <div class="tiktokOptionRow">
+          <label class="tiktokOptionLabel" title="Setelah clip selesai, otomatis download video, copy caption, dan arahkan ke TikTok Creator Studio">
+            <input type="checkbox" id="autoUploadTiktok" checked />
+            <span class="tiktokCheckCustom"></span>
+            <span class="tiktokOptionText" data-i18n="label.auto_tiktok">🎵 Otomatis arahkan ke TikTok Upload setelah klip selesai</span>
+          </label>
+        </div>
         <div class="help actionsHelp" data-i18n="help.actions">
           Scan Heatmap = ambil daftar momen “Most Replayed”. Buat Clip = download + crop + (opsional) subtitle.
         </div>
@@ -206,6 +224,78 @@
       </section>
     </main>
 
+    <!-- Fullscreen Loading Overlay during clip generation -->
+    <div id="loadingOverlay" class="loadingOverlay hide" role="alertdialog" aria-modal="true" aria-labelledby="loadingTitle">
+      <div class="loadingBackdrop"></div>
+      <div class="loadingCard">
+        <div class="loaderVisual">
+          <div class="orbitSpinner">
+            <div class="orbitRing"></div>
+            <div class="orbitRing inner"></div>
+            <div class="centerIcon">🎬</div>
+          </div>
+        </div>
+
+        <div class="loadingHeader">
+          <h2 id="loadingTitle" class="loadingTitle" data-i18n="js.loading.title">Sedang Membuat Klip Video...</h2>
+          <p id="loadingSubtitle" class="loadingSubtitle" data-i18n="js.loading.subtitle">Memproses video dengan resolusi tinggi & subtitle AI</p>
+        </div>
+
+        <!-- Progress Bar and Percent -->
+        <div class="loadingProgressWrap">
+          <div class="loadingBarTrack">
+            <div id="loadingBarFill" class="loadingBarFill" style="width: 0%"></div>
+          </div>
+          <div class="loadingProgressStats">
+            <span id="loadingPercent" class="loadingPercent">0%</span>
+            <span id="loadingClipCounter" class="loadingClipCounter">Klip 0/0</span>
+          </div>
+        </div>
+
+        <!-- Stage Steps Indicator -->
+        <div class="loadingStages">
+          <div id="stageDownload" class="stageBadge" data-stage="download">
+            <span class="badgeIcon">⬇️</span>
+            <span class="badgeText" data-i18n="js.stage.download">Download</span>
+          </div>
+          <div class="stageArrow">➔</div>
+          <div id="stageCrop" class="stageBadge" data-stage="crop">
+            <span class="badgeIcon">✂️</span>
+            <span class="badgeText" data-i18n="js.stage.crop">Crop</span>
+          </div>
+          <div class="stageArrow">➔</div>
+          <div id="stageSubtitle" class="stageBadge" data-stage="subtitle">
+            <span class="badgeIcon">📝</span>
+            <span class="badgeText" data-i18n="js.stage.subtitle">Subtitle</span>
+          </div>
+          <div class="stageArrow">➔</div>
+          <div id="stageFinal" class="stageBadge" data-stage="burn_subtitle">
+            <span class="badgeIcon">✨</span>
+            <span class="badgeText" data-i18n="js.stage.burn_subtitle">Burn Subtitle</span>
+          </div>
+        </div>
+
+        <!-- Current Live Status Text -->
+        <div id="loadingStatusText" class="loadingStatusText">Mempersiapkan pembuatan klip...</div>
+
+        <!-- Warning Callout Box to prevent close / refresh -->
+        <div id="loadingWarningBox" class="loadingWarningBox">
+          <div class="warningIcon">🔒</div>
+          <div class="warningContent">
+            <strong data-i18n="js.loading.warn_title">JANGAN TUTUP ATAU REFRESH HALAMAN</strong>
+            <p data-i18n="js.loading.warn_desc">Proses rendering video sedang berlangsung. Menutup atau me-refresh halaman ini akan membatalkan klip yang sedang diproses.</p>
+          </div>
+        </div>
+
+        <!-- Completion Box with TikTok Action -->
+        <div id="loadingCompleteBox" class="loadingCompleteBox hide">
+          <button id="loadingTiktokBtn" class="btn tiktokBtn pulseBtn" type="button">
+            🎵 Langsung Upload ke TikTok Sekarang
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div id="modal" class="modal hide" role="dialog" aria-modal="true">
       <div class="modalBackdrop" id="modalBackdrop"></div>
       <div class="modalCard">
@@ -214,6 +304,15 @@
           <button id="modalClose" class="iconBtn" aria-label="Close">✕</button>
         </div>
         <div id="modalBody" class="modalBody"></div>
+      </div>
+    </div>
+
+    <!-- Toast Notification for TikTok Upload & Copy Actions -->
+    <div id="toast" class="toast hide" role="status" aria-live="polite">
+      <div class="toastIcon" id="toastIcon">🎵</div>
+      <div class="toastContent">
+        <strong id="toastTitle">Klip Siap Di-upload ke TikTok!</strong>
+        <p id="toastMessage">Video terunduh & caption disalin. Tab TikTok telah dibuka!</p>
       </div>
     </div>
 

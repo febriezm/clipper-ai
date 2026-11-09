@@ -1,4 +1,5 @@
 import os
+import re
 import json
 import subprocess
 import sys
@@ -69,14 +70,145 @@ def add_log(job_id, line):
             job["logs"] = job["logs"][-300:]
 
 
-def list_outputs(job_dir):
+def generate_clip_social_kit(clip_index, video_title="", uploader="", transcript=""):
+    """
+    Generate catchy viral titles, engaging caption, and relevant hashtags
+    for a YouTube Short / Reel / TikTok clip.
+    """
+    clean_title = (video_title or "").strip()
+    clean_uploader = (uploader or "").strip()
+    clean_transcript = (transcript or "").strip()
+
+    # 1. Generate Hashtags
+    evergreen_tags = ["#shorts", "#fyp", "#viral", "#trending", "#reels", "#youtubeshorts", "#foryou"]
+    tags = list(evergreen_tags)
+
+    if clean_uploader:
+        up_tag = re.sub(r"[^a-zA-Z0-9]", "", clean_uploader).lower()
+        if up_tag and f"#{up_tag}" not in tags:
+            tags.append(f"#{up_tag}")
+
+    if clean_title:
+        t_clean = re.sub(r"[^a-zA-Z0-9]", "", clean_title).lower()
+        if 4 <= len(t_clean) <= 24 and f"#{t_clean}" not in tags:
+            tags.append(f"#{t_clean}")
+
+        words = re.findall(r"[a-zA-Z0-9]+", clean_title.lower())
+        stopwords = {
+            "yang", "untuk", "dengan", "dari", "pada", "dalam", "video", "youtube",
+            "this", "that", "with", "from", "and", "the", "bisa", "akan", "kamu", "saya"
+        }
+        for w in words:
+            if len(w) >= 4 and w not in stopwords:
+                tag = f"#{w}"
+                if tag not in tags:
+                    tags.append(tag)
+
+        title_lower = clean_title.lower()
+        if any(k in title_lower for k in ["podcast", "bahlul", "ngobrol", "cerita", "bicara"]):
+            tags.extend(["#podcast", "#ngobrol"])
+        if any(k in title_lower for k in ["lucu", "ngakak", "komedi", "standup", "lawak", "kocak"]):
+            tags.extend(["#lucu", "#ngakak", "#komedi"])
+        if any(k in title_lower for k in ["game", "gaming", "mabar", "play"]):
+            tags.extend(["#gaming", "#gameplay"])
+        if any(k in title_lower for k in ["tutorial", "cara", "tips", "belajar", "coding"]):
+            tags.extend(["#tips", "#tutorial", "#edukasi"])
+
+    tags.append("#indonesia")
+    seen = set()
+    final_tags = [t for t in tags if not (t in seen or seen.add(t))][:15]
+    hashtags_str = " ".join(final_tags)
+
+    # 2. Generate Titles (Hooks)
+    title_variations = []
+    if clean_transcript:
+        sentences = re.split(r"[.!?\n]+", clean_transcript)
+        sentences = [s.strip() for s in sentences if len(s.strip()) > 8]
+        if sentences:
+            first_s = sentences[0]
+            if len(first_s) > 55:
+                first_s = first_s[:52] + "..."
+            title_variations.append(f'"{first_s}" 😱')
+            title_variations.append(f'"{first_s}" - {clean_uploader or "Momen Seru"} 🔥')
+
+    if clean_title:
+        title_variations.append(f"Momen Tak Terduga di {clean_title}! 😱 Part {clip_index}")
+        title_variations.append(f"{clean_title} | Momen Paling Pecah! 🔥")
+        title_variations.append(f"Gak Nyangka Banget! {clean_title} 💥 Part {clip_index}")
+        title_variations.append(f"Wajib Tonton Sampai Habis! {clean_title} 🎬")
+    else:
+        title_variations.append(f"Momen Viral Paling Seru Part {clip_index} 🔥")
+        title_variations.append(f"Tonton Sampai Habis! 😱 Part {clip_index}")
+
+    main_title = title_variations[0] if title_variations else f"Highlight Clip #{clip_index} 🔥"
+
+    # 3. Generate Caption
+    caption_lines = []
+    if clean_transcript:
+        snippet = clean_transcript[:180] + ("..." if len(clean_transcript) > 180 else "")
+        caption_lines.append(f'"{snippet}"\n')
+
+    if clean_title:
+        caption_lines.append(f"Momen paling rame dari: {clean_title}")
+    if clean_uploader:
+        caption_lines.append(f"Kreator: {clean_uploader}")
+
+    caption_lines.append("\nKalian setuju gak nih? Tulis pendapat kalian di kolom komentar ya! 👇")
+    caption_lines.append("Jangan lupa Like, Share & Follow untuk klip seru berikutnya! ✨")
+    caption_str = "\n".join(caption_lines)
+
+    return {
+        "title": main_title,
+        "title_variations": title_variations,
+        "caption": caption_str,
+        "hashtags": hashtags_str
+    }
+
+
+def list_outputs(job_dir, video_preview=None):
     if not os.path.isdir(job_dir):
         return []
     items = []
+    video_title = (video_preview or {}).get("title", "")
+    uploader = (video_preview or {}).get("uploader", "")
     for name in os.listdir(job_dir):
         path = os.path.join(job_dir, name)
-        if os.path.isfile(path) and name.lower().endswith(".mp4"):
-            items.append({"name": name, "size": os.path.getsize(path)})
+        if (
+            os.path.isfile(path)
+            and name.lower().endswith(".mp4")
+            and not name.startswith("temp_")
+            and not name.startswith("source_")
+        ):
+            base_name = os.path.splitext(name)[0]
+            idx_match = re.search(r"\d+", base_name)
+            clip_idx = int(idx_match.group()) if idx_match else len(items) + 1
+            meta_path = os.path.join(job_dir, f"{base_name}.meta.json")
+            meta = {}
+            if os.path.exists(meta_path):
+                try:
+                    with open(meta_path, "r", encoding="utf-8") as mf:
+                        meta = json.load(mf)
+                except Exception:
+                    pass
+
+            if not meta.get("title") or not meta.get("caption") or not meta.get("hashtags"):
+                kit = generate_clip_social_kit(clip_idx, video_title, uploader, meta.get("transcript", ""))
+                meta.update(kit)
+                try:
+                    with open(meta_path, "w", encoding="utf-8") as mf:
+                        json.dump(meta, mf, ensure_ascii=False, indent=2)
+                except Exception:
+                    pass
+
+            items.append({
+                "name": name,
+                "size": os.path.getsize(path),
+                "title": meta.get("title", f"Clip #{clip_idx}"),
+                "title_variations": meta.get("title_variations", []),
+                "caption": meta.get("caption", ""),
+                "hashtags": meta.get("hashtags", ""),
+                "transcript": meta.get("transcript", "")
+            })
     items.sort(key=lambda x: x["name"])
     return items
 
@@ -92,9 +224,10 @@ def run_job(job_id, payload):
 
         crop = payload.get("crop") or "default"
         ratio = payload.get("ratio") or "9:16"
+        resolution = payload.get("resolution") or "720p"
         subtitle = bool(payload.get("subtitle"))
         whisper_model = payload.get("whisper_model") or "small"
-        subtitle_font = payload.get("subtitle_font") or "Arial"
+        subtitle_font = payload.get("subtitle_font") or "Poppins"
         subtitle_location = payload.get("subtitle_location") or "bottom"
         subtitle_fontsdir = payload.get("subtitle_fontsdir") or None
         if not subtitle_fontsdir and os.path.isdir("fonts"):
@@ -109,7 +242,7 @@ def run_job(job_id, payload):
         core.SUBTITLE_FONTS_DIR = subtitle_fontsdir
         core.SUBTITLE_LOCATION = subtitle_location
         core.PADDING = max(0, padding if padding is not None else 10)
-        core.set_ratio_preset(ratio)
+        core.set_ratio_preset(ratio, resolution=resolution)
 
         job_dir = os.path.join("clips", job_id)
         os.makedirs(job_dir, exist_ok=True)
@@ -125,6 +258,11 @@ def run_job(job_id, payload):
             raise ValueError("URL YouTube invalid")
 
         total_duration = core.get_duration(video_id)
+        try:
+            video_preview = get_preview(url)
+        except Exception:
+            video_preview = {}
+        set_job(job_id, preview=video_preview)
 
         targets = []
         picked = payload.get("segments")
@@ -166,15 +304,31 @@ def run_job(job_id, payload):
             clip_index = safe_int(data.get("clip_index"), 0) or 0
             set_job(job_id, stage=stage, stage_at=now_ms(), stage_clip=clip_index)
 
-        success = 0
-        for idx, item in enumerate(targets, start=1):
-            set_job(job_id, current=idx, status_text=f"clip {idx}/{len(targets)}")
-            ok = core.proses_satu_clip(video_id, item, idx, total_duration, crop, subtitle, event_hook=event_hook)
-            if ok:
-                success += 1
-            set_job(job_id, done=idx, success=success, outputs=list_outputs(job_dir))
+        source_file = os.path.join(job_dir, f"source_{video_id}.mp4")
+        set_job(job_id, stage="download", status_text=f"mengunduh video sumber ({resolution})...")
+        add_log(job_id, f"Mengunduh video sumber (target resolusi {resolution}) via native yt-dlp...")
+        core.download_source_video(video_id, source_file, event_hook=event_hook, resolution=resolution)
+        add_log(job_id, "Video sumber berhasil diunduh. Mulai memotong klip...")
 
-        set_job(job_id, status="done", finished_at=now_ms(), outputs=list_outputs(job_dir))
+        success = 0
+        try:
+            for idx, item in enumerate(targets, start=1):
+                set_job(job_id, current=idx, status_text=f"clip {idx}/{len(targets)}")
+                ok = core.proses_satu_clip(
+                    video_id, item, idx, total_duration, crop, subtitle,
+                    event_hook=event_hook, source_file=source_file
+                )
+                if ok:
+                    success += 1
+                set_job(job_id, done=idx, success=success, outputs=list_outputs(job_dir, video_preview=video_preview))
+        finally:
+            if os.path.exists(source_file):
+                try:
+                    os.remove(source_file)
+                except Exception:
+                    pass
+
+        set_job(job_id, status="done", finished_at=now_ms(), outputs=list_outputs(job_dir, video_preview=video_preview))
     except Exception as e:
         set_job(job_id, status="error", error=str(e), finished_at=now_ms())
 
@@ -202,6 +356,7 @@ def get_preview(url):
         sys.executable,
         "-m",
         "yt_dlp",
+        *core.get_ytdlp_js_args(),
         "--skip-download",
         "-J",
         key,

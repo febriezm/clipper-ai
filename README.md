@@ -1,6 +1,6 @@
 # YouTube Heatmap Clipper 🎬
 
-🇮🇩 **Bahasa Indonesia** | [🇺🇸 English](README_EN.md)
+🇮🇩 **Bahasa Indonesia** | [🇺🇸 English](README_EN.md) | [📖 **Arsitektur Sistem**](arsitektur_clipper_ai.md)
 
 Web app buat ngambil momen paling “rame” dari video YouTube lewat data Most Replayed (heatmap), terus otomatis jadiin clip vertikal yang siap buat Shorts/Reels/TikTok — lengkap dengan opsi subtitle AI.
 
@@ -22,7 +22,8 @@ Ini versi web dari proyek original: https://github.com/0xACAB666/yt-heatmap-clip
 - Extracts YouTube Most Replayed (heatmap) segments
 - Automatically selects high-engagement moments
 - Configurable pre and post padding for each clip
-- Outputs 9:16 vertical video format (720x1280)
+- Outputs 9:16 vertical video format (720x1280, 1080x1920, hingga 2160x3840 4K UHD)
+- Output resolutions: 720p (HD), 1080p (Full HD), dan 4K (2160p Ultra HD)
 - No YouTube API key required
 - Supports standard YouTube videos and Shorts
 
@@ -47,9 +48,10 @@ Ini versi web dari proyek original: https://github.com/0xACAB666/yt-heatmap-clip
 - Select segments (multi select) + tombol Create Selected Clip
 - Custom start/end (manual) buat potong satu range
 - Output ratio: 9:16, 1:1, 16:9, original
+- Resolusi video: 720p (HD), 1080p (Full HD), 4K (Ultra HD)
 - Subtitle (opsional):
   - Faster-Whisper model selection (tiny → large-v3)
-  - Pilih font (Plus Jakarta Sans / Roboto / Montserrat / Arial / Custom)
+  - Pilih font (Poppins / Plus Jakarta Sans / Roboto / Montserrat / Arial / Custom)
   - Pilih lokasi subtitle (Bottom / Centered)
   - Fonts dir support (folder fonts berisi .ttf/.otf)
 

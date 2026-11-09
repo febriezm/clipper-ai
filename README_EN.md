@@ -1,6 +1,6 @@
 # YouTube Heatmap Clipper 🎬
 
-[🇮🇩 Bahasa Indonesia](README.md) | 🇺🇸 **English**
+[🇮🇩 Bahasa Indonesia](README.md) | 🇺🇸 **English** | [📖 **Architecture Document**](arsitektur_clipper_ai.md)
 
 A web application to extract the most engaging moments from YouTube videos using "Most Replayed" (heatmap) data, and automatically convert them into vertical-ready clips for Shorts, Reels, and TikTok — featuring AI-powered subtitles.
 
@@ -22,7 +22,8 @@ This is the web version of the original project: https://github.com/0xACAB666/yt
 - Extracts YouTube "Most Replayed" (heatmap) segments
 - Automatically selects high-engagement moments
 - Configurable pre and post padding for each clip
-- Outputs 9:16 vertical video format (720x1280)
+- Outputs 9:16 vertical video format (720x1280, 1080x1920, up to 2160x3840 4K UHD)
+- Output resolutions: 720p (HD), 1080p (Full HD), and 4K (2160p Ultra HD)
 - No YouTube API key required
 - Supports standard YouTube videos and Shorts
 
@@ -47,9 +48,10 @@ This is the web version of the original project: https://github.com/0xACAB666/yt
 - **Batch Processing**: Multi-select segments and "Create Selected Clips"
 - **Custom Ranges**: Manually set Start/End times for custom clipping
 - **Multiple Aspect Ratios**: 9:16, 1:1, 16:9, or original ratio
+- **Multiple Video Resolutions**: 720p (HD), 1080p (Full HD), 4K (2160p Ultra HD)
 - **Advanced Subtitle Options**:
   - Faster-Whisper model selection (tiny → large-v3)
-  - Font selection (Plus Jakarta Sans, Roboto, Montserrat, Arial, or Custom)
+  - Font selection (Poppins, Plus Jakarta Sans, Roboto, Montserrat, Arial, or Custom)
   - Subtitle positioning (Bottom or Centered)
   - Custom fonts directory support
 

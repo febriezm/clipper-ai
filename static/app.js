@@ -14,6 +14,8 @@ const I18N = {
     "opt.ratio.9_16": "9:16 (Shorts)",
     "opt.ratio.original": "Original",
     "help.ratio": "Pilih bentuk output video. 9:16 buat Shorts/Reels/TikTok.",
+    "label.resolution": "Resolusi",
+    "help.resolution": "Kualitas video output (720p, 1080p, atau 4K).",
     "label.crop": "Crop",
     "opt.crop.default": "Default",
     "opt.crop.split_left": "Split Left",
@@ -53,6 +55,8 @@ const I18N = {
     "panel.progress": "Progress",
     "js.modal.preview_segment": "Preview Segment",
     "js.modal.preview_clip": "Preview Clip",
+    "js.modal.open_yt": "Buka di YouTube",
+    "js.modal.unmute_hint": "🔊 Video otomatis dibisukan oleh browser (unmute di kontrol player).",
     "js.segments.empty": "Belum ada segment. Klik Scan Heatmap dulu.",
     "js.preview.loading": "Loading preview…",
     "js.progress.count": "{done}/{total} selesai • {success} sukses",
@@ -67,6 +71,29 @@ const I18N = {
     "js.stage.finalize": "Finalize",
     "js.stage.done_clip": "Selesai",
     "js.topprogress.processing": "Processing",
+    "js.form.title": "📌 Judul Video (Title)",
+    "js.form.caption": "📝 Caption / Deskripsi",
+    "js.form.hashtags": "# Hashtag Rekomendasi",
+    "js.form.copy_title": "📋 Salin Judul",
+    "js.form.copy_caption": "📋 Salin Caption",
+    "js.form.copy_hashtags": "📋 Salin #",
+    "js.form.copy_all": "📋 Salin Lengkap (Judul + Caption + #)",
+    "js.form.var_title": "🔄 Variasi Judul Lain",
+    "js.form.copied": "✅ Berhasil disalin!",
+    "js.loading.title": "Sedang Membuat Klip Video...",
+    "js.loading.subtitle": "Memproses video dengan resolusi tinggi & subtitle AI",
+    "js.loading.warn_title": "JANGAN TUTUP ATAU REFRESH HALAMAN",
+    "js.loading.warn_desc": "Proses rendering video sedang berlangsung. Menutup atau me-refresh halaman ini akan membatalkan klip yang sedang diproses.",
+    "js.loading.complete": "Semua klip berhasil dibuat!",
+    "js.loading.failed": "Terjadi kendala saat memproses klip.",
+    "label.auto_tiktok": "🎵 Otomatis arahkan ke TikTok Upload setelah klip selesai",
+    "btn.tiktok_upload": "🎵 Upload ke TikTok",
+    "js.scan.loading_title": "Memindai Heatmap YouTube...",
+    "js.scan.loading_desc": "Menganalisis kurva Most Replayed untuk menemukan momen viral dengan retensi penonton tertinggi...",
+    "js.scan.scanning_btn": "Memindai Heatmap...",
+    "js.tiktok.toast_title": "🚀 Klip Siap Di-upload ke TikTok!",
+    "js.tiktok.toast_desc": "Video telah otomatis diunduh & caption disalin ke clipboard! Di tab TikTok, tinggal seret file video & tekan Ctrl+V pada deskripsi.",
+    "js.tiktok.reopen_btn": "🎵 Buka TikTok Creator Studio ({name})",
   },
   en: {
     "top.tagline": "Scan Most Replayed, auto cut, clean subtitles.",
@@ -81,6 +108,8 @@ const I18N = {
     "opt.ratio.9_16": "9:16 (Shorts)",
     "opt.ratio.original": "Original",
     "help.ratio": "Choose output aspect ratio. 9:16 is for Shorts/Reels/TikTok.",
+    "label.resolution": "Resolution",
+    "help.resolution": "Output video quality (720p, 1080p, or 4K).",
     "label.crop": "Crop",
     "opt.crop.default": "Default",
     "opt.crop.split_left": "Split Left",
@@ -120,6 +149,8 @@ const I18N = {
     "panel.progress": "Progress",
     "js.modal.preview_segment": "Preview Segment",
     "js.modal.preview_clip": "Preview Clip",
+    "js.modal.open_yt": "Open in YouTube",
+    "js.modal.unmute_hint": "🔊 Video is auto-muted by browser policy (unmute in player controls).",
     "js.segments.empty": "No segments yet. Click Scan Heatmap first.",
     "js.preview.loading": "Loading preview…",
     "js.progress.count": "{done}/{total} done • {success} success",
@@ -134,6 +165,29 @@ const I18N = {
     "js.stage.finalize": "Finalize",
     "js.stage.done_clip": "Done",
     "js.topprogress.processing": "Processing",
+    "js.form.title": "📌 Video Title",
+    "js.form.caption": "📝 Caption / Description",
+    "js.form.hashtags": "# Recommended Hashtags",
+    "js.form.copy_title": "📋 Copy Title",
+    "js.form.copy_caption": "📋 Copy Caption",
+    "js.form.copy_hashtags": "📋 Copy #",
+    "js.form.copy_all": "📋 Copy All (Title + Caption + #)",
+    "js.form.var_title": "🔄 New Title Hook",
+    "js.form.copied": "✅ Copied to clipboard!",
+    "js.loading.title": "Creating Video Clips...",
+    "js.loading.subtitle": "Rendering high-res video & AI subtitles",
+    "js.loading.warn_title": "DO NOT CLOSE OR REFRESH PAGE",
+    "js.loading.warn_desc": "Video rendering in progress. Closing or refreshing will cancel the active clip processing.",
+    "js.loading.complete": "All video clips created successfully!",
+    "js.loading.failed": "Encountered an issue processing clips.",
+    "label.auto_tiktok": "🎵 Auto-redirect to TikTok Upload after clips finish",
+    "btn.tiktok_upload": "🎵 Upload to TikTok",
+    "js.scan.loading_title": "Scanning YouTube Heatmap...",
+    "js.scan.loading_desc": "Analyzing Most Replayed curve to find peak viral retention moments...",
+    "js.scan.scanning_btn": "Scanning Heatmap...",
+    "js.tiktok.toast_title": "🚀 Ready to Upload to TikTok!",
+    "js.tiktok.toast_desc": "Video downloaded & caption copied! On TikTok, drag & drop the video and press Ctrl+V into caption.",
+    "js.tiktok.reopen_btn": "🎵 Open TikTok Creator Studio ({name})",
   },
 };
 
@@ -346,6 +400,7 @@ function readPayload() {
     url: $("url").value,
     mode: $("mode").value,
     ratio: $("ratio").value,
+    resolution: $("resolution")?.value || "720p",
     crop: $("crop").value,
     padding: Number($("padding").value || 0),
     max_clips: Number($("max_clips").value || 6),
@@ -375,13 +430,43 @@ function getVideoThumb(videoId, fallback) {
 function openYouTubePreview(videoId, startSec, endSec, title) {
   const start = Math.max(0, Math.floor(Number(startSec) || 0));
   const end = Math.max(0, Math.floor(Number(endSec) || 0));
-  const url = `https://www.youtube.com/embed/${encodeURIComponent(videoId)}?start=${start}${end > start ? `&end=${end}` : ""}&autoplay=1&playsinline=1&rel=0`;
+  const origin = window.location.origin;
+  const ytUrl = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(videoId)}?start=${start}${end > start ? `&end=${end}` : ""}&autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1${origin && origin.startsWith("http") ? `&origin=${encodeURIComponent(origin)}` : ""}`;
+  const directUrl = `https://youtu.be/${encodeURIComponent(videoId)}?t=${start}`;
+
+  const container = document.createElement("div");
+  container.className = "previewContainer";
+
   const iframe = document.createElement("iframe");
   iframe.className = "embed";
-  iframe.src = url;
+  iframe.src = ytUrl;
   iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
   iframe.allowFullscreen = true;
-  openModal(title || t("js.modal.preview_segment"), iframe);
+  iframe.referrerPolicy = "strict-origin-when-cross-origin";
+  container.appendChild(iframe);
+
+  const footer = document.createElement("div");
+  footer.className = "previewFooter";
+
+  const info = document.createElement("div");
+  info.className = "previewInfo";
+  const dur = end > start ? ` (${end - start}s)` : "";
+  info.innerHTML = `<div>⏱️ <strong>${fmtTime(start)} → ${fmtTime(end)}</strong>${dur}</div><div class="previewHint">${t("js.modal.unmute_hint")}</div>`;
+  footer.appendChild(info);
+
+  const actions = document.createElement("div");
+  actions.className = "previewActions";
+  const directLink = document.createElement("a");
+  directLink.className = "btn ghost smallBtn";
+  directLink.href = directUrl;
+  directLink.target = "_blank";
+  directLink.rel = "noopener noreferrer";
+  directLink.textContent = `↗ ${t("js.modal.open_yt")}`;
+  actions.appendChild(directLink);
+  footer.appendChild(actions);
+
+  container.appendChild(footer);
+  openModal(title || t("js.modal.preview_segment"), container);
 }
 
 function openClipPreview(title, src) {
@@ -424,17 +509,242 @@ function clearSelectedSegments() {
   updateSelectedUi();
 }
 
+// --- Loading Overlay & Prevent Accidental Page Close/Reload ---
+let isProcessingClip = false;
+
+function showLoadingOverlay(totalClips = 1) {
+  isProcessingClip = true;
+  document.body.classList.add("isClipping");
+  const overlay = $("loadingOverlay");
+  if (!overlay) return;
+
+  $("loadingBarFill").style.width = "0%";
+  $("loadingPercent").textContent = "0%";
+  $("loadingClipCounter").textContent = `Klip 0/${totalClips}`;
+  $("loadingStatusText").textContent = t("js.topprogress.processing") + "...";
+
+  ["stageDownload", "stageCrop", "stageSubtitle", "stageFinal"].forEach((id) => {
+    const el = $(id);
+    if (el) el.classList.remove("active", "done");
+  });
+
+  overlay.classList.remove("hide");
+}
+
+function updateLoadingOverlay(job) {
+  if (!job) return;
+  const overlay = $("loadingOverlay");
+  if (!overlay || overlay.classList.contains("hide")) return;
+
+  const total = Number(job.total) || 1;
+  const current = Number(job.current) || 0;
+  const done = Number(job.done) || 0;
+  const stage = (job.stage || "").toLowerCase();
+
+  let stagePct = 0;
+  if (stage === "download") stagePct = 0.15;
+  else if (stage === "crop") stagePct = 0.35;
+  else if (stage.startsWith("subtitle")) stagePct = 0.65;
+  else if (stage.startsWith("burn") || stage === "finalize") stagePct = 0.90;
+  else if (stage === "done_clip" || job.status === "done") stagePct = 1.0;
+
+  let overallPct = 0;
+  if (total > 0) {
+    const completedFraction = done / total;
+    const activeFraction = (1 / total) * stagePct;
+    overallPct = Math.min(100, Math.round((completedFraction + activeFraction) * 100));
+  }
+  if (job.status === "done") overallPct = 100;
+
+  $("loadingBarFill").style.width = `${overallPct}%`;
+  $("loadingPercent").textContent = `${overallPct}%`;
+  $("loadingClipCounter").textContent = `Klip ${Math.max(current, done)}/${total}`;
+
+  if (job.status_text) {
+    let readableStage = job.status_text;
+    if (job.stage && I18N[currentLang]?.[`js.stage.${job.stage}`]) {
+      readableStage = t(`js.stage.${job.stage}`);
+    }
+    $("loadingStatusText").textContent = `${readableStage} (Klip ${current || 1}/${total})`;
+  }
+
+  const bDownload = $("stageDownload");
+  const bCrop = $("stageCrop");
+  const bSub = $("stageSubtitle");
+  const bFinal = $("stageFinal");
+
+  [bDownload, bCrop, bSub, bFinal].forEach(el => el && el.classList.remove("active", "done"));
+
+  if (stage === "download") {
+    bDownload?.classList.add("active");
+  } else if (stage === "crop") {
+    bDownload?.classList.add("done");
+    bCrop?.classList.add("active");
+  } else if (stage.startsWith("subtitle")) {
+    bDownload?.classList.add("done");
+    bCrop?.classList.add("done");
+    bSub?.classList.add("active");
+  } else if (stage.startsWith("burn") || stage === "finalize") {
+    bDownload?.classList.add("done");
+    bCrop?.classList.add("done");
+    bSub?.classList.add("done");
+    bFinal?.classList.add("active");
+  } else if (stage === "done_clip" || job.status === "done") {
+    bDownload?.classList.add("done");
+    bCrop?.classList.add("done");
+    bSub?.classList.add("done");
+    bFinal?.classList.add("done");
+  }
+}
+
+function highlightLoadingWarning() {
+  const box = $("loadingWarningBox");
+  if (!box) return;
+  box.classList.remove("shake");
+  void box.offsetWidth;
+  box.classList.add("shake");
+  setTimeout(() => box.classList.remove("shake"), 600);
+}
+
+let toastTimer = null;
+function showToast(title, message, icon = "🎵", duration = 7000) {
+  const tEl = $("toast");
+  if (!tEl) return;
+  $("toastTitle").textContent = title;
+  $("toastMessage").textContent = message;
+  $("toastIcon").textContent = icon;
+  tEl.classList.remove("hide");
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    tEl.classList.add("hide");
+  }, duration);
+}
+
+async function uploadClipToTikTok(clipItem, jobId) {
+  if (!clipItem) return;
+  const href = `/clips/${jobId}/${encodeURIComponent(clipItem.name)}`;
+
+  // 1. Trigger Video Download
+  const a = document.createElement("a");
+  a.href = href;
+  a.download = clipItem.name || "tiktok_clip.mp4";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  // 2. Prepare text (Caption + Hashtags)
+  const title = (clipItem.title || "").trim();
+  const caption = (clipItem.caption || "").trim();
+  const hashtags = (clipItem.hashtags || "").trim();
+  const textToCopy = `${caption}\n\n${hashtags}`.trim() || title;
+
+  // 3. Copy to clipboard
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(textToCopy);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = textToCopy;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+  } catch (err) {
+    console.warn("Copy to clipboard error:", err);
+  }
+
+  // 4. Open TikTok Creator Studio Upload in new tab
+  const tiktokUrl = "https://www.tiktok.com/creator-center/upload?from=webapp";
+  window.open(tiktokUrl, "_blank");
+
+  showToast(
+    t("js.tiktok.toast_title"),
+    t("js.tiktok.toast_desc"),
+    "🎵",
+    8000
+  );
+}
+
+function hideLoadingOverlay(isSuccess = true, lastJob = null) {
+  isProcessingClip = false;
+  document.body.classList.remove("isClipping");
+  const overlay = $("loadingOverlay");
+  if (!overlay) return;
+
+  if (isSuccess) {
+    $("loadingBarFill").style.width = "100%";
+    $("loadingPercent").textContent = "100%";
+    $("loadingStatusText").textContent = t("js.loading.complete");
+    ["stageDownload", "stageCrop", "stageSubtitle", "stageFinal"].forEach((id) => {
+      $(id)?.classList.add("done");
+    });
+
+    const outputs = lastJob && Array.isArray(lastJob.outputs) ? lastJob.outputs : [];
+    const shouldUploadTiktok = $("autoUploadTiktok")?.checked && outputs.length > 0;
+
+    if (shouldUploadTiktok) {
+      const firstClip = outputs[0];
+      const compBox = $("loadingCompleteBox");
+      const tiktokBtn = $("loadingTiktokBtn");
+      if (compBox && tiktokBtn) {
+        tiktokBtn.onclick = () => uploadClipToTikTok(firstClip, lastJob.id);
+        compBox.classList.remove("hide");
+      }
+      uploadClipToTikTok(firstClip, lastJob.id);
+    }
+
+    setTimeout(() => {
+      overlay.classList.add("hide");
+      const compBox = $("loadingCompleteBox");
+      if (compBox) compBox.classList.add("hide");
+
+      const progEl = $("progress");
+      if (progEl) {
+        progEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }, shouldUploadTiktok ? 1200 : 600);
+  } else {
+    overlay.classList.add("hide");
+  }
+}
+
+window.addEventListener("beforeunload", (e) => {
+  if (isProcessingClip) {
+    e.preventDefault();
+    e.returnValue = "";
+    highlightLoadingWarning();
+    return "";
+  }
+});
+
+window.addEventListener("keydown", (e) => {
+  if (isProcessingClip) {
+    const isF5 = e.key === "F5";
+    const isReload = (e.ctrlKey || e.metaKey) && (e.key === "r" || e.key === "R");
+    if (isF5 || isReload) {
+      e.preventDefault();
+      highlightLoadingWarning();
+    }
+  }
+});
+
 async function clipSelected() {
   if ($("mode").value !== "heatmap") return;
   if (selectedKeys.size === 0) return;
   setBusy(true);
+  const picked = lastScanSegments.filter((s) => selectedKeys.has(segKey(s)));
+  showLoadingOverlay(picked.length || 1);
   try {
     const payload = readPayload();
-    const picked = lastScanSegments.filter((s) => selectedKeys.has(segKey(s)));
     const data = await postJson("/api/clip", { ...payload, segments: picked });
     const jobId = data.job_id;
-    await pollJob(jobId);
+    const finalJob = await pollJob(jobId);
+    hideLoadingOverlay(finalJob && finalJob.status === "done", finalJob);
   } catch (e) {
+    hideLoadingOverlay(false);
     renderProgress({ status: "error", error: e.message, total: 0, done: 0, id: "" });
   } finally {
     setBusy(false);
@@ -461,8 +771,9 @@ function renderSegments(segments) {
     if (selectedKeys.has(key)) el.classList.add("selected");
     const thumb = getVideoThumb(currentVideoId, currentPreview?.thumbnail);
     el.innerHTML = `
-      <div class="segThumb">
+      <div class="segThumb" data-preview-trigger="1" title="Preview video">
         <img alt="" src="${thumb}" />
+        <div class="segPlayIcon" aria-hidden="true">▶</div>
         <div class="segTime">${fmtTime(start)}</div>
       </div>
       <div class="segMain">
@@ -475,8 +786,8 @@ function renderSegments(segments) {
       </div>
     `;
     el.addEventListener("click", (ev) => {
-      const target = ev.target;
-      if (target && target.dataset && target.dataset.preview) {
+      const isPreview = ev.target && (ev.target.closest("[data-preview]") || ev.target.closest("[data-preview-trigger]"));
+      if (isPreview) {
         ev.preventDefault();
         ev.stopPropagation();
         if (currentVideoId) openYouTubePreview(currentVideoId, start, end, currentPreview?.title || "Preview Segment");
@@ -497,14 +808,158 @@ function renderSegments(segments) {
   updateSelectedUi();
 }
 
+function escapeHtml(str) {
+  if (!str) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+function renderOutputCard(f, jobId, idx) {
+  const card = document.createElement("div");
+  card.className = "outCard";
+  card.dataset.name = f.name;
+  const href = `/clips/${jobId}/${encodeURIComponent(f.name)}`;
+
+  const variations = Array.isArray(f.title_variations) && f.title_variations.length > 0
+    ? f.title_variations
+    : [f.title || `Clip #${idx}`];
+  let varIdx = 0;
+
+  card.innerHTML = `
+    <div class="outHeader">
+      <div class="outLeft">
+        <span class="outBadge">🎬 Clip #${idx}</span>
+        <a class="outFileName" href="${href}" target="_blank" rel="noreferrer">${escapeHtml(f.name)}</a>
+        <span class="small">(${Math.round((f.size || 0) / 1024)} KB)</span>
+      </div>
+      <div class="outRight">
+        <button class="btn smallBtn tiktokBtn" type="button" data-tiktok="1">${t("btn.tiktok_upload")}</button>
+        <button class="btn ghost smallBtn" type="button" data-play="1">▶ Play</button>
+        <a class="btn ghost smallBtn" href="${href}" download>⬇ Download</a>
+      </div>
+    </div>
+
+    <div class="clipMetaForm">
+      <div class="metaRow">
+        <div class="metaLabelBar">
+          <label class="metaFieldLabel">${t("js.form.title")}</label>
+          <button class="copyMiniBtn" type="button" data-copy="title">${t("js.form.copy_title")}</button>
+        </div>
+        <input class="input clipTitleInput" type="text" value="${escapeHtml(f.title || '')}" />
+      </div>
+
+      <div class="metaRow">
+        <div class="metaLabelBar">
+          <label class="metaFieldLabel">${t("js.form.caption")}</label>
+          <button class="copyMiniBtn" type="button" data-copy="caption">${t("js.form.copy_caption")}</button>
+        </div>
+        <textarea class="input clipCaptionInput" rows="3">${escapeHtml(f.caption || '')}</textarea>
+      </div>
+
+      <div class="metaRow">
+        <div class="metaLabelBar">
+          <label class="metaFieldLabel">${t("js.form.hashtags")}</label>
+          <button class="copyMiniBtn" type="button" data-copy="hashtags">${t("js.form.copy_hashtags")}</button>
+        </div>
+        <textarea class="input clipHashtagsInput" rows="2">${escapeHtml(f.hashtags || '')}</textarea>
+      </div>
+
+      <div class="metaBottomBar">
+        <button class="btn smallBtn copyAllBtn" type="button">${t("js.form.copy_all")}</button>
+        ${variations.length > 1 ? `<button class="btn ghost smallBtn varTitleBtn" type="button">${t("js.form.var_title")}</button>` : ""}
+        <span class="copyFeedback">${t("js.form.copied")}</span>
+      </div>
+    </div>
+  `;
+
+  card.querySelector("[data-play]")?.addEventListener("click", (ev) => {
+    ev.preventDefault();
+    openClipPreview(f.name, href);
+  });
+
+  card.querySelector("[data-tiktok]")?.addEventListener("click", () => {
+    uploadClipToTikTok({
+      name: f.name,
+      title: titleInput.value,
+      caption: captionInput.value,
+      hashtags: hashtagsInput.value
+    }, jobId);
+  });
+
+  const titleInput = card.querySelector(".clipTitleInput");
+  const captionInput = card.querySelector(".clipCaptionInput");
+  const hashtagsInput = card.querySelector(".clipHashtagsInput");
+  const feedback = card.querySelector(".copyFeedback");
+
+  function showFeedback() {
+    if (!feedback) return;
+    feedback.classList.add("show");
+    setTimeout(() => {
+      feedback.classList.remove("show");
+    }, 2000);
+  }
+
+  async function copyToClipboard(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+      showFeedback();
+    } catch (err) {
+      console.error("Copy failed", err);
+    }
+  }
+
+  card.querySelector('[data-copy="title"]')?.addEventListener("click", () => {
+    copyToClipboard(titleInput.value);
+  });
+
+  card.querySelector('[data-copy="caption"]')?.addEventListener("click", () => {
+    copyToClipboard(captionInput.value);
+  });
+
+  card.querySelector('[data-copy="hashtags"]')?.addEventListener("click", () => {
+    copyToClipboard(hashtagsInput.value);
+  });
+
+  card.querySelector(".copyAllBtn")?.addEventListener("click", () => {
+    const fullText = `${titleInput.value}\n\n${captionInput.value}\n\n${hashtagsInput.value}`.trim();
+    copyToClipboard(fullText);
+  });
+
+  card.querySelector(".varTitleBtn")?.addEventListener("click", () => {
+    if (variations.length <= 1) return;
+    varIdx = (varIdx + 1) % variations.length;
+    titleInput.value = variations[varIdx];
+    titleInput.focus();
+  });
+
+  return card;
+}
+
 function renderProgress(job) {
   const root = $("progress");
   const meta = $("jobMeta");
   const out = $("outputs");
   root.innerHTML = "";
-  out.innerHTML = "";
   meta.textContent = "";
-  if (!job) return;
+  if (!job) {
+    out.innerHTML = "";
+    return;
+  }
   renderTopProgress(job);
   const total = Number(job.total || 0);
   const done = Number(job.done || 0);
@@ -531,26 +986,21 @@ function renderProgress(job) {
     root.appendChild(err);
   }
 
+  // Preserve card form contents across poll intervals by checking existing elements
+  const currentJobId = out.dataset.jobId;
+  if (currentJobId !== job.id) {
+    out.innerHTML = "";
+    out.dataset.jobId = job.id;
+  }
+
   if (Array.isArray(job.outputs) && job.outputs.length > 0) {
-    job.outputs.forEach((f) => {
-      const el = document.createElement("div");
-      el.className = "out";
-      const href = `/clips/${job.id}/${encodeURIComponent(f.name)}`;
-      el.innerHTML = `
-        <div class="outLeft">
-          <a href="${href}" target="_blank" rel="noreferrer">${f.name}</a>
-          <div class="small">${Math.round((f.size || 0) / 1024)} KB</div>
-        </div>
-        <div class="outRight">
-          <button class="btn ghost smallBtn" type="button" data-play="1">Play</button>
-          <a class="btn smallBtn" href="${href}" download>Download</a>
-        </div>
-      `;
-      el.querySelector("[data-play]")?.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        openClipPreview(f.name, href);
-      });
-      out.appendChild(el);
+    job.outputs.forEach((f, idx) => {
+      const safeName = (f.name || "").replace(/"/g, '\\"');
+      let existing = out.querySelector(`.outCard[data-name="${safeName}"]`);
+      if (!existing) {
+        const card = renderOutputCard(f, job.id, idx + 1);
+        out.appendChild(card);
+      }
     });
   }
 }
@@ -561,8 +1011,45 @@ let currentPreview = null;
 let currentVideoId = "";
 let selectedKeys = new Set();
 
+function renderScanLoading() {
+  const root = $("segments");
+  root.innerHTML = `
+    <div class="scanLoadingCard">
+      <div class="scanRadarWrap">
+        <div class="scanRadar">
+          <div class="radarSweep"></div>
+          <div class="radarPing"></div>
+          <div class="radarCenter">📡</div>
+        </div>
+      </div>
+      <div class="scanLoadingText">
+        <h4>${t("js.scan.loading_title")}</h4>
+        <p>${t("js.scan.loading_desc")}</p>
+      </div>
+      <div class="skeletonGrid">
+        <div class="segSkeleton"><div class="skThumb"></div><div class="skBody"><div class="skLine1"></div><div class="skLine2"></div></div></div>
+        <div class="segSkeleton"><div class="skThumb"></div><div class="skBody"><div class="skLine1"></div><div class="skLine2"></div></div></div>
+        <div class="segSkeleton"><div class="skThumb"></div><div class="skBody"><div class="skLine1"></div><div class="skLine2"></div></div></div>
+      </div>
+    </div>
+  `;
+}
+
 async function scan() {
+  const scanBtn = $("scanBtn");
+  const origBtnText = scanBtn.textContent;
+  scanBtn.classList.add("isScanning");
+  scanBtn.innerHTML = `<span class="btnSpinner"></span> ${t("js.scan.scanning_btn")}`;
+
   setBusy(true);
+  renderScanLoading();
+  $("segMeta").textContent = t("js.scan.scanning_btn");
+
+  const segPanel = $("segments");
+  if (segPanel) {
+    segPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }
+
   try {
     const { url } = readPayload();
     const data = await postJson("/api/scan", { url });
@@ -576,6 +1063,8 @@ async function scan() {
     renderSegments([]);
   } finally {
     setBusy(false);
+    scanBtn.classList.remove("isScanning");
+    scanBtn.textContent = origBtnText;
     updateSelectedUi();
   }
 }
@@ -609,12 +1098,15 @@ async function preview() {
 
 async function clip() {
   setBusy(true);
+  showLoadingOverlay(1);
   try {
     const payload = readPayload();
     const data = await postJson("/api/clip", payload);
     const jobId = data.job_id;
-    await pollJob(jobId);
+    const finalJob = await pollJob(jobId);
+    hideLoadingOverlay(finalJob && finalJob.status === "done", finalJob);
   } catch (e) {
+    hideLoadingOverlay(false);
     renderProgress({ status: "error", error: e.message, total: 0, done: 0, id: "" });
   } finally {
     setBusy(false);
@@ -628,7 +1120,10 @@ async function pollJob(jobId) {
     const data = await res.json().catch(() => null);
     if (!data || !data.ok) throw new Error("Job not found");
     renderProgress(data.job);
-    if (data.job.status === "done" || data.job.status === "error") return;
+    updateLoadingOverlay(data.job);
+    if (data.job.status === "done" || data.job.status === "error") {
+      return data.job;
+    }
     if (Date.now() - started > 1000 * 60 * 30) throw new Error("Timeout");
     await new Promise((r) => setTimeout(r, 1500));
   }
